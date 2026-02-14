@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mahii 🎉</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+}
+
+/* ---------- COMMON PAGE STYLE ---------- */
+.page{
+    height:100vh;
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    opacity:0;
+    pointer-events:none;
+    transition:.8s;
+}
+
+.page.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+button{
+    padding:12px 26px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4e73;
+    cursor:pointer;
+    margin-top:25px;
+}
+
+button:hover{
+    transform:scale(1.08);
+}
+
+/* ---------- PAGE COLORS ---------- */
+
+#page1{ background:linear-gradient(135deg,#ff758c,#ff7eb3); }
+#page2{ background:radial-gradient(circle at top,#667eea,#764ba2,#2b2e4a); }
+#page3{ background:radial-gradient(circle,#0f2027,#203a43,#2c5364); }
+#page4{ background:palevioletred; overflow:hidden;}
+#page5{ background:linear-gradient(120deg,#ff9a9e,#fad0c4); }
+#page6{
+    background:linear-gradient(120deg,#89f7fe,#66a6ff);
+    overflow:hidden;
+}
+
+/* message card */
+.message-card{
+    max-width:750px;
+    padding:45px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(16px);
+}
+
+/* flame */
+.flame{
+    width:14px;
+    height:25px;
+    background:orange;
+    border-radius:50%;
+    margin:15px auto;
+    animation:flicker .25s infinite alternate;
+}
+
+@keyframes flicker{
+    from{transform:scale(1)}
+    to{transform:scale(1.35)}
+}
+
+/* gallery */
+canvas{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:0;
+    pointer-events:none;
+}
+
+.gallery{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    width:80%;
+    margin-top:30px;
+}
+
+.gallery img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    border-radius:20px;
+}
+
+/* PASSWORD */
+#passwordOverlay{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:rgba(0,0,0,.85);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+    visibility:hidden;
+    opacity:0;
+    transition:.4s;
+}
+
+#passwordOverlay.show{
+    visibility:visible;
+    opacity:1;
+}
+
+.password-box{
+    background:white;
+    color:#333;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.error{
+    color:red;
+    display:none;
+}
+
+/* typing effect */
+#typedText{
+    font-size:28px;
+    max-width:800px;
+    line-height:1.6;
+    border-right:3px solid white;
+    padding-right:5px;
+}
+
+/* balloons */
+.balloon{
+    position:absolute;
+    bottom:-150px;
+    width:60px;
+    height:80px;
+    background:red;
+    border-radius:50%;
+    animation:float 10s infinite;
+}
+
+@keyframes float{
+    from{transform:translateY(0)}
+    to{transform:translateY(-120vh)}
+}
+
+/* confetti */
+.confetti{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:yellow;
+    top:-10px;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg);}
+}
+
+.bigWish{
+    font-size:60px;
+    text-shadow:0 0 20px rgba(255,255,255,.8);
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="andriig-happy-birthday-471211.mp3" loop></audio>
+
+<!-- PASSWORD -->
+<div id="passwordOverlay">
+    <div class="password-box">
+        <h3>🔐 Enter Password</h3>
+        <input type="password" id="passwordInput">
+        <br><br>
+        <button onclick="checkPassword()">Unlock ❤️</button>
+        <div class="error" id="errorMsg">Wrong password!</div>
+    </div>
+</div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page show">
+<h1>🎂 Happy Birthday Nani🎉</h1>
+<button onclick="nextPage(2)">Surprise 🎁</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<div class="message-card">
+<h1>A Special Message ❤️</h1>
+<p>Mr. Mahesh chowdari,<br><br>
+            On your special day, I just want you to know how important you are to me.
+            I wanna give you the bestest best I can... so I want to tell you that
+            <strong>I love you the most ❤️</strong>.<br><br>
+            I want us to stay as happy and joyful as we are now.
+            Seeing you smile is my favorite thing ✨.<br><br>
+            Keep smiling, keep shining, and keep being the amazing person you are
+            to me and our families 💙!!<br><br>
+            <strong>Once again, Happy Birthday Dear! 🎂🎉</strong></p>
+<button onclick="nextPage(3)">Make a Wish 🕯️</button>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+<h2>🕯️ Make a Wish</h2>
+<div class="flame" id="flame"></div>
+<button onclick="blowCandle()">Blow Candle</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page">
+<canvas id="fireworks"></canvas>
+<h2>Our Memories 📸</h2>
+
+<div class="gallery">
+<img src="m.jpg.jpeg">
+<img src="ms.jpeg">
+<img src="ms1.jpeg">
+<img src="ms2.jpeg">
+</div>
+
+<button onclick="nextPage(5)">One More Surprise ❤️</button>
+</div>
+
+<!-- PAGE 5 -->
+<div id="page5" class="page">
+<div id="typedText"></div>
+<button onclick="nextPage(6)">Final Surprise 🎉</button>
+</div>
+
+<!-- PAGE 6 -->
+<div id="page6" class="page">
+<h1 class="bigWish">🎂 HAPPY BIRTHDAY MY LOVE 🎂</h1>
+</div>
+
+<script>
+
+/* navigation */
+function nextPage(n){
+document.querySelector('.show').classList.remove('show');
+document.getElementById('page'+n).classList.add('show');
+
+const music=document.getElementById('music');
+if(music.paused){music.play().catch(()=>{});}
+
+if(n===5) startTyping();
+if(n===6){createBalloons();createConfetti();}
+}
+
+/* candle */
+function blowCandle(){
+document.getElementById('flame').style.display='none';
+setTimeout(()=>{
+document.getElementById('passwordOverlay').classList.add('show');
+},800);
+}
+
+/* password */
+function checkPassword(){
+if(document.getElementById('passwordInput').value==="1527"){
+passwordOverlay.classList.remove('show');
+nextPage(4);
+startFireworks();
+}else{
+errorMsg.style.display='block';
+}
+}
+
+/* fireworks */
+const canvas=document.getElementById('fireworks');
+const ctx=canvas.getContext('2d');
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=[];
+
+function startFireworks(){
+setInterval(()=>{
+for(let i=0;i<70;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height/2,
+a:Math.random()*Math.PI*2,
+s:Math.random()*5+2,
+l:100
+});
+}
+},600);
+animate();
+}
+
+function animate(){
+ctx.fillStyle='rgba(0,0,0,.2)';
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+p.x+=Math.cos(p.a)*p.s;
+p.y+=Math.sin(p.a)*p.s;
+p.l--;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`;
+ctx.fill();
+
+if(p.l<=0) particles.splice(i,1);
+});
+
+requestAnimationFrame(animate);
+}
+
+/* typing */
+const message="You are the most beautiful part of my life. Every moment with you feels magical. I hope this birthday brings endless happiness to you ❤️";
+
+let i=0;
+function startTyping(){
+const el=document.getElementById('typedText');
+const interval=setInterval(()=>{
+el.innerHTML+=message[i];
+i++;
+if(i>=message.length) clearInterval(interval);
+},40);
+}
+
+/* balloons */
+function createBalloons(){
+for(let i=0;i<15;i++){
+let b=document.createElement('div');
+b.className='balloon';
+b.style.left=Math.random()*100+'%';
+b.style.background=`hsl(${Math.random()*360},70%,60%)`;
+b.style.animationDuration=(6+Math.random()*5)+'s';
+document.body.appendChild(b);
+}
+}
+
+/* confetti */
+function createConfetti(){
+for(let i=0;i<120;i++){
+let c=document.createElement('div');
+c.className='confetti';
+c.style.left=Math.random()*100+'%';
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(3+Math.random()*3)+'s';
+document.body.appendChild(c);
+}
+}
+
+</script>
+</body>
+</html>
